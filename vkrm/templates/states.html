@@ -1,0 +1,26 @@
+{% extends "main.html" %}
+
+{% block content %}
+    <ul class="list-group">
+{% if states_list %}
+    {% for state in states_list %}
+        <li class="list-group-item">
+            <img src="{{ MEDIA_URL }}{{ state.state_image }}"  width=5% heigth=5% class="img-circle">
+            <a  href="{% url 'epochal_app:detail_state' state.id %}"> <span>{{ state.state_name }}</span> </a>
+            </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No states are available.</p>
+{% endif %}
+    <script type="text/javascript">
+    $(function() {
+    d3.selectAll("span")
+        .transition()
+        .duration(1000)
+        .style("font-size", "200%")
+        .style("text-shadow","1.5px 1.5px #000000")
+})
+    </script>
+{% endblock %}
+

@@ -1,0 +1,17 @@
+{% extends "main.html" %}
+
+{% block detail %}
+<h1>{{ age.age_name }}</h1>
+<ul>
+    <p><img src="{{ MEDIA_URL }}{{ age.age_image }}" width="20%" height="20%"/></p>
+    <p><b> Описание: </b> {{ age.age_description }} </p>
+</ul>
+
+    <script type="text/javascript">
+    $(function() {
+    d3.selectAll("h1")
+        .style("text-transform","uppercase")
+        .style("text-decoration", "underline")
+})
+    </script>
+{% endblock %}

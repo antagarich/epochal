@@ -1,0 +1,21 @@
+{% extends "main.html" %}
+{% load epochal_extras %}
+
+{% block detail %}
+<h1>{{ greatpersonality.pers_name }}</h1>
+<ul>
+    <p><img src="{{ MEDIA_URL }}{{ greatpersonality.pers_image}}" width="20%" height="20%"/></p>
+    <p><b> Год рождения: </b> {% if greatpersonality.pers_birth_year < 0 %} {{ greatpersonality.pers_birth_year|negate }} г. до н.э. {% elif greatpersonality.pers_birth_year >= 0 %} {{ greatpersonality.pers_birth_year}} г. {% endif %} </p>
+    <p><b> Год смерти: </b> {% if greatpersonality.pers_death_year < 0 %} {{ greatpersonality.pers_death_year|negate }} г. до н.э. {% elif greatpersonality.pers_death_year >= 0 %} {{ greatpersonality.pers_death_year}} г. {% endif %} ( {{ greatpersonality.pers_birth_year|subs:greatpersonality.pers_death_year }} лет) </p>
+    <p><b> Деятельность: </b>{{ greatpersonality.pers_metier }}</p>
+    <p><b> Государство: </b>{{ greatpersonality.state }}</p>
+<p><b> Описание: </b> {{ greatpersonality.pers_description }} </p>
+</ul>
+<script type="text/javascript">
+    $(function() {
+    d3.selectAll("h1")
+        .style("text-transform","uppercase")
+        .style("text-decoration", "underline")
+})
+    </script>
+{% endblock %}

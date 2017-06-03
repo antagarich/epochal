@@ -1,0 +1,22 @@
+{% extends "main.html" %}
+{% load epochal_extras %}
+
+{% block detail %}
+<h1>{{ greatevent.event_name }}</h1>
+<ul>
+    <p><img src="{{ MEDIA_URL }}{{ greatevent.event_image }}" width="20%" height="20%"/></p>
+
+    <p><b> Год: </b>{% if greatevent.event_year < 0 %} {{ greatevent.event_year|negate }} г. до н.э. {% elif greatevent.event_year >= 0 %} {{ greatevent.event_year}} г. {% endif %} </p>
+      <p><b> Эпоха: </b> {{ greatevent.age }} </p>
+    <p><b> Описание: </b> {{ greatevent.event_description }} </p>
+</ul>
+
+    <script type="text/javascript">
+    $(function() {
+    d3.selectAll("h1")
+        .style("text-transform","uppercase")
+        .style("text-decoration", "underline")
+})
+    </script>
+
+{% endblock %}

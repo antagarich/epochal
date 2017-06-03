@@ -1,0 +1,18 @@
+{% extends "main.html" %}
+
+{% block content %}
+    {%  if user.is_authenticated   %}
+                 <li class="list-group-item"><a href="/addArticle"><span class="glyphicon glyphicon-pencil"></span> Добавить новую статью </a></li>
+    {% endif %}
+{% if articles_list %}
+    <ul class="list-group">
+    {% for article in articles_list %}
+        <li class="list-group-item"><a href="{% url 'epochal_app:detail_article' article.id %}">{{ article.article_name }}, {{ article.article_date }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>Система не содержит статей.</p>
+{% endif %}
+
+
+{% endblock %}

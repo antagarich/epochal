@@ -1,0 +1,24 @@
+{% extends "main.html" %}
+
+{% block content %}
+{% if events_list %}
+    <ul class="list-group">
+    {% for greatevent in events_list %}
+        <li class="list-group-item">
+        <img src="{{ MEDIA_URL }}{{ greatevent.event_image}}"  width=5% heigth=5% class="img-rounded">
+            <a href="{% url 'epochal_app:detail_event' greatevent.id %}"><span>{{ greatevent.event_name }}</span></a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>Нет данных о событиях.</p>
+{% endif %}
+    <script type="text/javascript">
+    $(function() {
+    d3.selectAll("span")
+        .transition()
+        .duration(1000)
+        .style("font-size", "200%")
+        .style("text-shadow","1.5px 1.5px #000000")
+})
+    </script>
+{% endblock %}

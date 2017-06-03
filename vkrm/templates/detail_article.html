@@ -1,0 +1,20 @@
+{% extends "main.html" %}
+
+{% block detail %}
+<h1>{{ article.article_name }}</h1>
+<ul>
+    <p><b> Дата публикации: </b> {{ article.article_date }} </p>
+
+    <p><b> Автор: </b> {{ article.author }} </p>
+
+    <p> {{ article.article_body }} </p>
+</ul>
+
+    <script type="text/javascript">
+    $(function() {
+    d3.selectAll("h1")
+        .style("text-transform","uppercase")
+        .style("text-decoration", "underline")
+})
+    </script>
+{%  endblock %}

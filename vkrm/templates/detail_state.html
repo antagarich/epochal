@@ -1,0 +1,21 @@
+{% extends "main.html" %}
+{% load epochal_extras %}
+
+{% block detail %}
+    <h1>{{ state.state_name }}</h1>
+   <img src="{{ MEDIA_URL }}{{ state.state_image }}" width="20%" height="20%"/>
+
+                    <p><b> Столица: </b> {{ state.state_capital }} </p>
+                    <p><b> Основано: </b> {% if state.state_birth_year < 0 %} {{ state.state_birth_year|negate }} г. до н.э. {% elif state.state_birth_year >= 0 %} {{ state.state_birth_year}} г. {% endif %}</p>
+    <p><b> Эпоха: </b> {{ state.age }} </p>
+    <p><b> Описание: </b> {{ state.state_description }} </p>
+
+    <script type="text/javascript">
+    $(function() {
+    d3.selectAll("h1")
+        .style("text-transform","uppercase")
+        .style("text-decoration", "underline")
+})
+    </script>
+
+{% endblock %}

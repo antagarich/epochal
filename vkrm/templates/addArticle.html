@@ -1,0 +1,15 @@
+{% extends 'main.html' %}
+
+{% block content %}
+  <div id="addArticle">
+<form class="form-signin" action="/addArticle/" method="post">{% csrf_token %}
+        <h2 class="form-signin-heading"> Новая статья</h2>
+            Название статьи:
+            {{ form.article_name }}
+            Текст статьи:
+            {{ form.article_body }}
+            <input style="display: none" name="author" value="{{ user.id }}">
+            <button class="btn btn-lg btn-primary btn-block btn-success" type="submit"> Добавить </button>
+            </form>
+</div>
+{% endblock %}

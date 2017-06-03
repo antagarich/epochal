@@ -1,0 +1,62 @@
+{% extends "main.html" %}
+
+{% block content %}
+<div class="container">
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+      </ol>
+      <div class="carousel-inner">
+        <div class="item active">
+          <img src="media/greko-persidskie-voyny.jpg" alt="First slide" height="100%" width="100%">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>Расширьте свои знания</h1>
+              <p> Чем знаменит Христофор Колумб?</p>
+              <p><a class="btn btn-lg btn-primary" href="/events/1" role="button">Узнать</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="item">
+          <img src="media/carousel2.jpg" alt="Second slide">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>Погрузитесь в атмосферу античности</h1>
+              <p> Он стал основоположником формальной логики</p>
+              <p><a class="btn btn-lg btn-primary" href="/personalities/4/" role="button">Кто этот человек?</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="item">
+          <img src="media/carousel3.jpg" alt="Third slide">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>Узнайте о связях народов</h1>
+              <p>Это государство объединяло территории современной Польши и Прибалтии</p>
+              <p><a class="btn btn-lg btn-primary" href="/states/7/" role="button">Подробнее</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a class="left carousel-control" href="#myCarousel" data-slide="prev"></a>
+      <a class="right carousel-control" href="#myCarousel" data-slide="next"></a>
+    </div><!-- /.carousel -->
+{% if age_list %}
+    <div class="row">
+    {% for age in age_list %}
+        <div class="col-lg-3">
+        <img class="img-circle" src="{{ MEDIA_URL }}{{ age.age_image}}"  width=120px heigth=120px align="center">
+         <h2>   <a href="{% url 'epochal_app:detail_age' age.id %}">{{ age.age_name }}</a></h2>
+        </div>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No states are available.</p>
+{% endif %}
+</div>
+
+</div>
+{% endblock %}
