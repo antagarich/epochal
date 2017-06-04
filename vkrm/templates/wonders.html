@@ -6,7 +6,7 @@
     {% for wonder in wonder_list %}
         <li class="list-group-item">
         <img src="{{ MEDIA_URL }}{{ wonder.wonder_image}}"  width=5% heigth=5% class="img-rounded">
-            <a href="{% url 'epochal_app:detail_wonder' wonder.id %}"><span>{{ wonder.wonder_name }}</span></a></li>
+            <a href="{% url 'vkrm:detail_wonder' wonder.id %}"><span>{{ wonder.wonder_name }}</span></a></li>
     {% endfor %}
     </ul>
 {% else %}

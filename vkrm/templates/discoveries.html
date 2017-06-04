@@ -6,7 +6,7 @@
     {% for greatdiscovery in disc_list %}
         <li class="list-group-item">
         <img src="{{ MEDIA_URL }}{{ greatdiscovery.discovery_image}}"  width=5% heigth=5% class="img-rounded">
-        <a href="{% url 'epochal_app:detail_discovery' greatdiscovery.id %}"><span>{{ greatdiscovery.discovery_name }}</span></a></li>
+        <a href="{% url 'vkrm:detail_discovery' greatdiscovery.id %}"><span>{{ greatdiscovery.discovery_name }}</span></a></li>
     {% endfor %}
     </ul>
 {% else %}

@@ -8,6 +8,7 @@ from django.contrib.auth.forms import UserCreationForm
 from forms import ArticleForm
 from django.contrib.auth.models import User
 
+from vkrm.permission_resolver import get_object_permissions_for_user
 
 
 class States(generic.ListView):
@@ -15,7 +16,10 @@ class States(generic.ListView):
     context_object_name = 'states_list'
 
     def get_queryset(self):
-        return State.objects.order_by('state_birth_year')
+        states = list(State.objects.order_by('state_birth_year'))
+        for state in states:
+            state.permissions = get_object_permissions_for_user(self.request.user, state)
+        return states
 
 
 class IndexView(generic.ListView):

@@ -49,7 +49,7 @@
     {% for age in age_list %}
         <div class="col-lg-3">
         <img class="img-circle" src="{{ MEDIA_URL }}{{ age.age_image}}"  width=120px heigth=120px align="center">
-         <h2>   <a href="{% url 'epochal_app:detail_age' age.id %}">{{ age.age_name }}</a></h2>
+         <h2>   <a href="{% url 'vkrm:detail_age' age.id %}">{{ age.age_name }}</a></h2>
         </div>
     {% endfor %}
     </ul>

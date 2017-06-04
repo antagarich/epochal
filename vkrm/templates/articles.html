@@ -7,7 +7,7 @@
 {% if articles_list %}
     <ul class="list-group">
     {% for article in articles_list %}
-        <li class="list-group-item"><a href="{% url 'epochal_app:detail_article' article.id %}">{{ article.article_name }}, {{ article.article_date }}</a></li>
+        <li class="list-group-item"><a href="{% url 'vkrm:detail_article' article.id %}">{{ article.article_name }}, {{ article.article_date }}</a></li>
     {% endfor %}
     </ul>
 {% else %}

@@ -5,10 +5,10 @@
 <html>
   <head>
     <title>{% block title %}Электронная энциклопедия истории Европы {% endblock %}</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'epochal_app/css/bootstrap.css' %}" />
-   <link rel="stylesheet" type="text/css" href="{% static 'epochal_app/css/lavish-bootstrap.css' %}" />
-    <script src="{% static 'epochal_app/js/jquery.min.js' %}"></script>
-  <script src="{% static 'epochal_app/js/d3.min.js'%}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}" />
+   <link rel="stylesheet" type="text/css" href="{% static 'css/lavish-bootstrap.css' %}" />
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+  <script src="{% static 'js/d3.min.js'%}"></script>
   <style type="text/css">
       #registration{
           margin: auto;
@@ -63,14 +63,14 @@
 
 {% block login %} {% endblock %}
 {% block content %}{% endblock %}
-<div style= "background: url(/media/back.png); background-size: 100%" >
+<div style= "background: url(/vkrm/media/back.png); background-size: 100%" >
    <div class="container">
    {% block detail %} {% endblock %}
    </div>
 </div>
 </div>
 
- <script src={% static 'epochal_app/js/docs.min.js'%}></script>
-    <script src={% static 'epochal_app/js/bootstrap.min.js'%}></script>
+ <script src={% static 'js/docs.min.js'%}></script>
+    <script src={% static 'js/bootstrap.min.js'%}></script>
 </body>
 </html>

@@ -85,3 +85,38 @@ class Wonder(models.Model):
 
     def __unicode__(self):
         return self.wonder_name
+
+
+
+class Role(models.Model):
+    role_name = models.CharField(default=u"", unique= True, max_length=100)
+    user = models.ManyToManyField(User)
+
+    def __unicode__(self):
+        return self.role_name
+
+class Action(models.Model):
+    action_name = models.CharField(default=u"", unique= True, max_length=100)
+
+
+    def __unicode__(self):
+        return self.action_name
+
+class Object(models.Model):
+    object_type = models.TextField(default=u"")
+    object_id = models.IntegerField()
+
+    def __unicode__(self):
+        return u"Объект типа {0} с номером {1}"\
+            .format(self.object_type, self.object_id)
+
+
+class Permission(models.Model):
+    permission_name = models.CharField(default=u"", unique=True, max_length=100)
+    role = models.ForeignKey(Role)
+    object = models.ForeignKey(Object)
+    action = models.ForeignKey(Action)
+
+    def __unicode__(self):
+        return u"Разрешение на действие {0} на объект типа {1} с номером {2} для роли {3}"\
+            .format(self.action.action_name, self.object.object_type, self.object.object_id, self.role.role_name)
