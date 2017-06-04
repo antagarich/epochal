@@ -2,6 +2,8 @@
 import datetime
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models.signals import post_save, post_delete
+from django.dispatch import receiver
 
 
 class Age(models.Model):
@@ -120,3 +122,53 @@ class Permission(models.Model):
     def __unicode__(self):
         return u"Разрешение на действие {0} на объект типа {1} с номером {2} для роли {3}"\
             .format(self.action.action_name, self.object.object_type, self.object.object_id, self.role.role_name)
+
+
+def get_default_permissions():
+    actions = {}
+    roles = {}
+    for action_name in ['read', 'update', 'delete']:
+        actions[action_name] = Action.objects.get(action_name=action_name)
+    for role_name in ['Guest', 'Reader', 'Editor', 'Moderator']:
+        roles[role_name] = Role.objects.get(role_name=role_name)
+
+    permissions = []
+    permissions.append({'action': actions['read'], 'role': roles['Reader']})
+    permissions.append({'action': actions['read'], 'role': roles['Editor']})
+    permissions.append({'action': actions['read'], 'role': roles['Moderator']})
+    permissions.append({'action': actions['update'], 'role': roles['Editor']})
+    permissions.append({'action': actions['update'], 'role': roles['Moderator']})
+    permissions.append({'action': actions['delete'], 'role': roles['Moderator']})
+    return permissions
+
+
+@receiver(post_save, sender=State)
+@receiver(post_save, sender=Article)
+@receiver(post_save, sender=GreatPersonality)
+@receiver(post_save, sender=GreatEvent)
+@receiver(post_save, sender=GreatDiscovery)
+@receiver(post_save, sender=Wonder)
+def add_object(sender, created, instance, **kwargs):
+    if created:
+        obj = Object(object_type=instance.__class__.__name__, object_id=instance.id)
+        obj.save()
+        permissions = get_default_permissions()
+        for permission in permissions:
+            perm = Permission(permission_name="{0} {1} {2}"
+                              .format(obj.object_id, permission['role'].role_name, permission['action'].action_name),
+                              object=obj, role=permission['role'], action=permission['action'])
+            perm.save()
+
+
+@receiver(post_delete, sender=State)
+@receiver(post_delete, sender=Article)
+@receiver(post_delete, sender=GreatPersonality)
+@receiver(post_delete, sender=GreatEvent)
+@receiver(post_delete, sender=GreatDiscovery)
+@receiver(post_delete, sender=Wonder)
+def delete_object(sender, instance, **kwargs):
+    try:
+        obj = Object.objects.get(object_type=instance.__class__.__name__, object_id=instance.id)
+        obj.delete()
+    except Object.DoesNotExist:
+        pass

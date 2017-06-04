@@ -19,7 +19,7 @@ class States(generic.ListView):
         states = list(State.objects.order_by('state_birth_year'))
         for state in states:
             state.permissions = get_object_permissions_for_user(self.request.user, state)
-        return states
+        return [state for state in states if state.permissions.get('read')]
 
 
 class IndexView(generic.ListView):
