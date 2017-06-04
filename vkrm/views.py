@@ -144,10 +144,33 @@ def addArticle(request):
             form.errors['author'] = (u'Пользователь не тот',)
         if form.is_valid():
             form.save()
+            return redirect('/articles/')
         else:
             args['form'] = form
     return render(request, 'addArticle.html', args)
 
+
+def editArticle(request, pk):
+    args = {}
+    args.update(csrf(request))
+    article = Article.objects.get(id=pk)
+
+    if request.method == "POST":
+        form = ArticleForm(data=request.POST, instance=article)
+        if form.is_valid():
+            form.save()
+        else:
+            args['form'] = form
+        return redirect('/editArticle/{}/'.format(pk))
+    else:
+        args['form'] = ArticleForm(instance=article)
+        return render(request, 'editArticle.html', args)
+
+
+def deleteArticle(request, pk):
+    article = Article.objects.get(id=pk)
+    article.delete()
+    return redirect('/articles/')
 
 class Wonders(generic.ListView):
     template_name = 'wonders.html'

@@ -1,0 +1,15 @@
+{% extends 'main.html' %}
+
+{% block content %}
+  <div id="editArticle">
+<form class="form-signin" action="/editArticle/{{ form.instance.id }}/" method="post">{% csrf_token %}
+        <h2 class="form-signin-heading"> Редактирование статьи</h2>
+            Название статьи:
+            {{ form.article_name }}
+            Текст статьи:
+            {{ form.article_body }}
+            <input style="display: none" name="author" value="{{ user.id }}">
+            <button class="btn btn-lg btn-primary btn-block btn-success" type="submit"> Обновить </button>
+            </form>
+</div>
+{% endblock %}

@@ -22,6 +22,8 @@ urlpatterns = patterns('',
                        url(r'^login/$', views.login,name='login'),
                        url(r'^logout/$',views.logout,name='logout'),
                        url(r'^register/$', views.register,name='register'),
-                       url(r'^addArticle/$', views.addArticle,name='addArticle'))
+                       url(r'^addArticle/$', views.addArticle,name='addArticle'),
+                       url(r'^editArticle/(?P<pk>\d+)/$', views.editArticle,name='editArticle'),
+                       url(r'^deleteArticle/(?P<pk>\d+)/$', views.deleteArticle,name='deleteArticle'),)
 if settings.DEBUG:
     urlpatterns += patterns('',(r'^media/(?P<path>.*)$','django.views.static.serve', {'document_root': settings.MEDIA_ROOT}))

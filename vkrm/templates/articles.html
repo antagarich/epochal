@@ -7,7 +7,12 @@
 {% if articles_list %}
     <ul class="list-group">
     {% for article in articles_list %}
-        <li class="list-group-item"><a href="{% url 'vkrm:detail_article' article.id %}">{{ article.article_name }}, {{ article.article_date }}</a></li>
+        <li class="list-group-item">
+            <a href="{% url 'vkrm:detail_article' article.id %}">{{ article.article_name }}, {{ article.article_date }}</a>
+            <a type="button" class="btn btn-info" href="/editArticle/{{ article.id }}/">Редактировать</a>
+            <a type="button" class="btn btn-danger" href="/deleteArticle/{{ article.id }}/">Удалить</a>
+        </li>
+
     {% endfor %}
     </ul>
 {% else %}
